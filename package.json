@@ -1,21 +1,35 @@
 {
   "name": "el-hub-ventures-website",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "version": "2.0.0",
+  "private": true,
+  "description": "EL-HUB VENTURES marketing site",
   "scripts": {
-    "start": "node api/index.js",
-    "dev": "node api/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "dotenv": "^17.4.0",
-    "express": "^5.2.1",
+    "@hookform/resolvers": "^5.7.1",
     "marked": "^18.0.0",
-    "nodemailer": "^8.0.4"
+    "next": "^15.5.23",
+    "nodemailer": "^8.0.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-hook-form": "^7.85.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.15.0",
+    "@types/nodemailer": "^6.4.17",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.8.3"
   }
 }

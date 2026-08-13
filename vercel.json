@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "headers": [
     {
       "source": "/(.*)",
@@ -10,27 +9,5 @@
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
       ]
     }
-  ],
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "index.html,index.css,content_calendar.csv,insights/**",
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/resources",
-      "destination": "/api/index"
-    },
-    {
-      "source": "/resources/(.*)",
-      "destination": "/api/index"
-    },
-    {
-      "source": "/insights/(.*)",
-      "destination": "/api/index"
-    }
-  ],
-  "cleanUrls": true
+  ]
 }
