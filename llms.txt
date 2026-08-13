@@ -11,7 +11,7 @@ EL-HUB VENTURES is a digital engineering and growth partner helping ambitious le
 - /services/seo-services.html — Technical SEO, on‑page SEO, and growth retainers
 - /case-studies.html — Outcomes and delivery examples
 - /resources/ — Insights hub (technical articles and guides)
-- /contact.html — Offices (Nigeria HQ, Canada, UK), phone, email, and project inquiry form
+- /contact.html — Offices (Nigeria HQ, Canada, UK, Cameroon), phone, email, and project inquiry form
 
 ## Primary Topics
 - Web development (React, Next.js, Node.js)

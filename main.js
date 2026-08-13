@@ -477,14 +477,9 @@ document.addEventListener('DOMContentLoaded', () => {
             href: 'https://wa.me/2349139370513'
         },
         {
-            label: 'Ontario-Canada',
-            phone: '+1 (226) 697-7828',
-            href: 'https://wa.me/12266977828'
-        },
-        {
-            label: 'Birmingham-UK',
-            phone: '(+44) 7474 780484',
-            href: 'https://wa.me/447474780484'
+            label: 'Limbe-Cameroon',
+            phone: '(+237) 6 96 54 18 45',
+            href: 'https://wa.me/237696541845'
         }
     ];
 
