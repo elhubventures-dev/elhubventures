@@ -17,11 +17,32 @@ function insightsDir() {
   return path.join(process.cwd(), "insights");
 }
 
+function parseCsvLine(line: string): string[] {
+  const cells: string[] = [];
+  let current = "";
+  let quoted = false;
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i];
+    if (ch === '"') {
+      quoted = !quoted;
+      continue;
+    }
+    if (ch === "," && !quoted) {
+      cells.push(current.trim());
+      current = "";
+      continue;
+    }
+    current += ch;
+  }
+  cells.push(current.trim());
+  return cells;
+}
+
 export function getLivePosts(): InsightPost[] {
   const csvPath = calendarPath();
   if (!fs.existsSync(csvPath)) return [];
 
-  const lines = fs.readFileSync(csvPath, "utf8").trim().split("\n");
+  const lines = fs.readFileSync(csvPath, "utf8").trim().split(/\r?\n/);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const posts: InsightPost[] = [];
@@ -29,7 +50,7 @@ export function getLivePosts(): InsightPost[] {
   for (let i = 1; i < lines.length; i += 1) {
     const line = lines[i];
     if (!line) continue;
-    const [topic, slug, publishDate, keyword] = line.split(",");
+    const [topic, slug, publishDate, keyword] = parseCsvLine(line);
     if (!topic || !slug || !publishDate) continue;
     const postDate = new Date(publishDate);
     postDate.setHours(0, 0, 0, 0);

@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "seo:audit": "node scripts/seo-audit.js",
+    "seo:ping": "node scripts/ping-sitemap.mjs"
   },
   "keywords": [],
   "author": "",

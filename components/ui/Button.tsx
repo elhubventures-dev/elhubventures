@@ -30,7 +30,8 @@ export function Button({
   disabled,
   external,
 }: ButtonProps) {
-  const classes = `inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold tracking-wide transition duration-150 disabled:opacity-60 ${variants[variant]} ${className}`;
+  const glow = variant === "primary" ? "hover:shadow-[0_8px_24px_color-mix(in_srgb,var(--gold)_35%,transparent)]" : "";
+  const classes = `inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold tracking-wide transition-[transform,color,background-color,box-shadow] duration-150 hover:-translate-y-px active:scale-[0.98] disabled:opacity-60 disabled:hover:translate-y-0 disabled:active:scale-100 ${glow} ${variants[variant]} ${className}`;
 
   if (href) {
     if (external) {

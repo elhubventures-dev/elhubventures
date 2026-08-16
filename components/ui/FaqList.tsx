@@ -23,7 +23,11 @@ export function FaqList({ items = FAQS }: { items?: readonly { question: string;
                 {isOpen ? "−" : "+"}
               </span>
             </button>
-            {isOpen ? <p className="pb-5 text-ink-muted">{item.answer}</p> : null}
+            {isOpen ? (
+              <p className="faq-answer pb-5 text-ink-muted">{item.answer}</p>
+            ) : (
+              <p className="sr-only">{item.answer}</p>
+            )}
           </div>
         );
       })}

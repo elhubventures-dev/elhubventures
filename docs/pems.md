@@ -1,7 +1,7 @@
 # Pulse Engineering Memory System (PEMS) — Project Record
 
 **PEMS Version:** 1.0  
-**Last Updated:** 2026-08-13  
+**Last Updated:** 2026-08-16  
 **Updated By:** Pulse Software Studio / Senior Full Stack Engineer  
 
 ---
@@ -12,14 +12,14 @@
 |---|---|
 | Project | EL-HUB VENTURES Website |
 | Current version | 2.0.0 |
-| Current sprint / phase | Consulting template rebuild (shipped in repo) |
+| Current sprint / phase | SEO + GEO Sections 0–12 implemented in repo |
 | Architecture (one line) | Next.js App Router marketing site + contact Route Handler + markdown insights |
 | Tech stack (one line) | Next.js 15, React 19, TypeScript, Tailwind CSS v4, Zod, React Hook Form, nodemailer, marked |
 | Design system | Consulting-light tokens in `app/globals.css` |
-| Primary risks | SEO URL cutover; SMTP env vars; illustrative case studies vs leadership names |
+| Primary risks | Only 3 GSC-valid URLs; CSP vs widgets; illustrative case studies vs leadership names |
 | Open decisions | Real client proof vs labelled delivery examples |
-| Recent changes | Static HTML/Express rebuilt as Next.js consulting template |
-| Next priorities | Production deploy, Lighthouse pass on live domain, photography refresh |
+| Recent changes | Level 3 motion/premium UI (CSS Reveal, glass, mesh heroes) |
+| Next priorities | GSC index money pages; complete GBP profile; mark GA4 key event; PSI |
 
 ---
 
@@ -53,7 +53,7 @@
 | Styling | Tailwind CSS v4 + CSS tokens | |
 | State / data fetching | Server Components | |
 | Forms / validation | React Hook Form + Zod | |
-| Animation | CSS transitions only | reduced-motion respected |
+| Animation | CSS tokens + IntersectionObserver `Reveal` | reduced-motion respected; no Framer Motion |
 | Testing | None yet | |
 | CI/CD | Vercel | |
 | Hosting | Vercel | |
@@ -94,7 +94,7 @@
 | Spacing / radius conventions | 4/8/12/16/24/32/48/64; radius 4px/8px |
 | Component library | `components/ui/*`, `components/layout/*` |
 | Icon set | Inline SVG |
-| Motion language | 150–200ms opacity/transform; reduced-motion disable |
+| Motion language | 150ms chrome / 400ms reveals; transform+opacity; glass + gold mesh; reduced-motion skip |
 | Accessibility target | WCAG 2.2 AA |
 
 ---
@@ -122,6 +122,7 @@
 | 2026-08-13 | Next.js App Router rebuild | Shared chrome, tokens, maintainability | Static HTML restyle | New stack; 301s required |
 | 2026-08-13 | Light-first consulting look | Professional B2B UX vs luxury dark template | Keep gold-on-black | New visual identity |
 | 2026-08-13 | Case studies labelled as delivery examples | Same names previously used as clients and leadership | Fake testimonials | Trust risk reduced |
+| 2026-08-16 | CSS-first Level 3 motion (no Framer Motion) | Keep bundle small; match PEMS CSS-only motion | Framer Motion | `Reveal` + tokens |
 
 ---
 
@@ -141,9 +142,9 @@
 
 | Field | Value |
 |---|---|
-| Current sprint / milestone | Consulting template rebuild |
-| Open tasks | Live deploy verification |
-| Blocked tasks | None |
+| Current sprint / milestone | SEO + GEO sequential program (S0–S12) |
+| Open tasks | GSC verify; GBP; paste Ahrefs/GSC exports |
+| Blocked tasks | Paid keyword volumes until Ahrefs paste |
 | Technical debt (active) | Duplicate `assets/` vs `public/assets/`; no automated tests |
 
 ---
@@ -152,7 +153,8 @@
 
 | Asset | Path / location | Notes |
 |---|---|---|
-| Components | `components/ui`, `components/layout` | Header, footer, cards, form |
+| Components | `components/ui`, `components/layout` | Header, footer, cards, form, `Reveal` |
+| Motion utilities | `app/globals.css` | `.reveal-armed`, `.glass`, `.card-surface`, `.mesh-hero`, `.hero-enter` |
 | Services / utilities | `lib/posts.ts`, `lib/contact.ts`, `lib/seo.ts` | |
 | Content | `content/services.ts`, `content/case-studies.ts` | |
 
@@ -173,9 +175,10 @@
 
 | Idea | Area | Priority | Notes |
 |---|---|---|---|
-| Automated a11y/Lighthouse CI | Testing | Medium | |
+| Automated a11y/Lighthouse CI | Testing | Medium | Workflow added; LHCI token optional |
 | Real photography | UI | Medium | |
 | Drop duplicate root `assets/` | Architecture | Low | Serve only `public/assets` |
+| Fill keyword volumes from Ahrefs | SEO | High | Hybrid research |
 
 ---
 

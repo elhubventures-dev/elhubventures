@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AnswerCapsule } from "@/components/seo/AnswerCapsule";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { PageHero } from "@/components/ui/PageHero";
+import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { SERVICE_GROUPS, SERVICES } from "@/content/services";
-import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Digital Services",
@@ -15,14 +19,24 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function ServicesIndexPage() {
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+  ];
+
   return (
     <>
+      <Breadcrumbs items={crumbs} />
       <PageHero
         eyebrow="Services"
         title="Product, experience, growth, and platform."
         description="End-to-end delivery from discovery through launch and retainers. Pick a practice, or start with a brief."
         primaryCta={{ href: "/contact", label: "Start a project" }}
       />
+      <AnswerCapsule>
+        EL-HUB VENTURES services cover product (web, mobile, commerce, AI), experience (UI/UX), growth (SEO and
+        strategy), and platform (cloud and DevOps). Each practice ships with a documented handover and optional retainer.
+      </AnswerCapsule>
       <section className="py-20">
         <Container className="space-y-16">
           {SERVICE_GROUPS.map((group) => {
@@ -31,8 +45,10 @@ export default function ServicesIndexPage() {
               <div key={group.id}>
                 <h2 className="font-display text-3xl text-ink">{group.label}</h2>
                 <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {items.map((service) => (
-                    <ServiceCard key={service.slug} service={service} />
+                  {items.map((service, index) => (
+                    <Reveal key={service.slug} delay={index * 50}>
+                      <ServiceCard service={service} />
+                    </Reveal>
                   ))}
                 </div>
               </div>
@@ -48,6 +64,7 @@ export default function ServicesIndexPage() {
         </Container>
       </section>
       <CtaBand />
+      <JsonLd data={breadcrumbJsonLd(crumbs.map((c) => ({ name: c.name, path: c.href })))} />
     </>
   );
 }

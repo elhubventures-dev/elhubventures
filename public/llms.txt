@@ -8,10 +8,15 @@ EL-HUB VENTURES is a digital engineering and growth partner helping operators sh
 - /services — Full services catalog (web, mobile, UI/UX, cloud, SEO, AI, e-commerce, training)
 - /services/web-development — Custom web development and web applications
 - /services/mobile-app-development — iOS, Android, and cross-platform mobile apps
-- /services/seo-services — Technical SEO, on-page SEO, and growth retainers
-- /case-studies — Outcomes and delivery examples
+- /services/seo-services — Technical SEO, on-page SEO, GEO, and growth retainers
+- /case-studies — Delivery examples (labelled; not client testimonials)
 - /about — Team, hubs, process, engagement models, and FAQ
 - /resources — Insights hub (technical articles and guides)
+- /resources/glossary — Term definitions for product, cloud, and SEO
+- /resources/faq — Compiled FAQ hub with FAQPage schema
+- /resources/react-vs-flutter — React Native vs Flutter for MVPs
+- /resources/statistics — How to read ITU, World Bank, and NBS ICT figures
+- /resources/agency-vs-freelancer — When to hire a firm vs a freelancer
 - /contact — Offices (Nigeria HQ, Canada, UK, Cameroon), phone, email, and project inquiry form
 
 ## Primary Topics

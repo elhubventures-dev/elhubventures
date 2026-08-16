@@ -6,7 +6,8 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StickyCta } from "@/components/layout/StickyCta";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
-import { organizationJsonLd, pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { localBusinessJsonLd, organizationJsonLd, pageMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -23,9 +24,9 @@ const sourceSerif = Source_Serif_4({
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "Web & Mobile App Development Agency",
+    title: "EL-HUB VENTURES | Web & Mobile Agency Nigeria",
     description:
-      "EL-HUB VENTURES builds scalable web apps, mobile products, and technical SEO programs for teams in Nigeria, the USA, the UK, and globally.",
+      "EL-HUB VENTURES builds scalable web apps, mobile products, and technical SEO for teams in Nigeria, the USA, the UK, and globally.",
     path: "/",
   }),
   metadataBase: new URL("https://www.elhubventures.com"),
@@ -49,7 +50,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <StickyCta />
           <WhatsAppWidget />
         </ThemeProvider>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <JsonLd data={jsonLd} />
+        <JsonLd data={localBusinessJsonLd()} />
       </body>
     </html>
   );

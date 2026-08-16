@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AnswerCapsule } from "@/components/seo/AnswerCapsule";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { getPost, getPostHtml } from "@/lib/posts";
-import { pageMetadata, absoluteUrl } from "@/lib/seo";
+import { pageMetadata, absoluteUrl, breadcrumbJsonLd } from "@/lib/seo";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -38,7 +41,7 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
 
   const articleLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.topic,
     description,
     datePublished: publishedISO,
@@ -54,8 +57,15 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
     keywords: post.keyword,
   };
 
+  const crumbs = [
+    { name: "Home", href: "/" },
+    { name: "Insights", href: "/resources" },
+    { name: post.topic, href: `/insights/${post.slug}` },
+  ];
+
   return (
     <>
+      <Breadcrumbs items={crumbs} />
       <article>
         <header className="border-b border-rule bg-paper-raised pt-28 pb-14">
           <Container className="max-w-3xl">
@@ -64,9 +74,15 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
             <p className="mt-5 text-ink-muted">
               Published {post.publishDate}
               {post.keyword ? ` · ${post.keyword}` : ""}
+              {" · "}
+              Last updated {post.publishDate}
             </p>
           </Container>
         </header>
+        <AnswerCapsule>
+          {post.topic}. This EL-HUB VENTURES insight covers {post.keyword || "the topic"} for operators deciding how to
+          staff, architect, or grow a digital product.
+        </AnswerCapsule>
         <Container className="py-16">
           <div className="prose-insight" dangerouslySetInnerHTML={{ __html: html }} />
           <aside className="mt-16 max-w-[42rem] border border-rule bg-paper-raised p-6">
@@ -74,7 +90,7 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
             <ul className="mt-4 space-y-2 text-ink-muted">
               <li>
                 <Link href="/case-studies" className="hover:text-gold">
-                  Case studies
+                  delivery examples and case studies
                 </Link>
               </li>
               <li>
@@ -94,7 +110,8 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
           </aside>
         </Container>
       </article>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
+      <JsonLd data={articleLd} />
+      <JsonLd data={breadcrumbJsonLd(crumbs.map((c) => ({ name: c.name, path: c.href })))} />
     </>
   );
 }

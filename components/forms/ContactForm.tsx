@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button";
 import { Dialog } from "@/components/ui/Dialog";
+import { trackEvent } from "@/lib/analytics";
 import { CALENDLY_URL } from "@/lib/site";
 
 const schema = z.object({
@@ -56,6 +57,7 @@ export function ContactForm() {
       setStatusMessage(result.message || "Unable to send right now. Please try again shortly.");
       return;
     }
+    trackEvent("generate_lead", { method: "contact_form", service: values.service });
     if (window.dataLayer) {
       window.dataLayer.push({ event: "lead_form_submit", service: values.service });
     }
@@ -80,14 +82,14 @@ export function ContactForm() {
             Full name
           </label>
           <input id="name" className={fieldClass} autoComplete="name" {...register("name")} />
-          {errors.name ? <p className="mt-1 text-sm text-red-700">{errors.name.message}</p> : null}
+          {errors.name ? <p className="form-error mt-1 text-sm text-red-700">{errors.name.message}</p> : null}
         </div>
         <div>
           <label htmlFor="email" className="text-sm font-medium text-ink">
             Email address
           </label>
           <input id="email" type="email" className={fieldClass} autoComplete="email" {...register("email")} />
-          {errors.email ? <p className="mt-1 text-sm text-red-700">{errors.email.message}</p> : null}
+          {errors.email ? <p className="form-error mt-1 text-sm text-red-700">{errors.email.message}</p> : null}
         </div>
         <div>
           <label htmlFor="service" className="text-sm font-medium text-ink">
@@ -103,7 +105,7 @@ export function ContactForm() {
             <option value="seo">Search Engine Optimization</option>
             <option value="other">Other</option>
           </select>
-          {errors.service ? <p className="mt-1 text-sm text-red-700">{errors.service.message}</p> : null}
+          {errors.service ? <p className="form-error mt-1 text-sm text-red-700">{errors.service.message}</p> : null}
         </div>
         <div>
           <label htmlFor="budget" className="text-sm font-medium text-ink">
@@ -116,7 +118,7 @@ export function ContactForm() {
             <option value="15k-40k">$15,000 - $40,000</option>
             <option value="40k-plus">$40,000+</option>
           </select>
-          {errors.budget ? <p className="mt-1 text-sm text-red-700">{errors.budget.message}</p> : null}
+          {errors.budget ? <p className="form-error mt-1 text-sm text-red-700">{errors.budget.message}</p> : null}
         </div>
         <div>
           <label htmlFor="timeline" className="text-sm font-medium text-ink">
@@ -129,14 +131,14 @@ export function ContactForm() {
             <option value="3-6-months">3-6 months</option>
             <option value="flexible">Flexible timeline</option>
           </select>
-          {errors.timeline ? <p className="mt-1 text-sm text-red-700">{errors.timeline.message}</p> : null}
+          {errors.timeline ? <p className="form-error mt-1 text-sm text-red-700">{errors.timeline.message}</p> : null}
         </div>
         <div>
           <label htmlFor="message" className="text-sm font-medium text-ink">
             Project details
           </label>
           <textarea id="message" rows={4} className={fieldClass} {...register("message")} />
-          {errors.message ? <p className="mt-1 text-sm text-red-700">{errors.message.message}</p> : null}
+          {errors.message ? <p className="form-error mt-1 text-sm text-red-700">{errors.message.message}</p> : null}
         </div>
         <div className="absolute -left-[9999px]" aria-hidden="true">
           <label htmlFor="companyWebsite">Company website</label>

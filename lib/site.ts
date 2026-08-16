@@ -2,7 +2,20 @@ export const SITE_NAME = "EL-HUB VENTURES";
 export const SITE_URL = "https://www.elhubventures.com";
 export const SITE_EMAIL = "contact@elhubventures.com";
 export const GA_MEASUREMENT_ID = "G-0R31KZCPYT";
+export const GA4_PROPERTY = "elhubventures-bda9d";
 export const CALENDLY_URL = "https://calendly.com/contact-elhubventures/30min";
+
+/** Verified Google Business Profile NAP (2026-08-16). Keep identical on site, schema, and directories. */
+export const HQ_NAP = {
+  gbpName: "El-Hub Ventures",
+  streetAddress: "12 Garba A Idris St, Kado",
+  addressLocality: "Abuja",
+  addressRegion: "Federal Capital Territory",
+  postalCode: "900108",
+  addressCountry: "NG",
+  category: "Software company",
+  mapsQuery: "12+Garba+A+Idris+St+Kado+Abuja+900108",
+} as const;
 
 export const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/elhubventures" },
@@ -15,7 +28,7 @@ export const HUBS = [
   {
     code: "NG",
     name: "Nigeria (HQ)",
-    location: "Abuja 900108, Nigeria",
+    location: "12 Garba A Idris St, Kado, Abuja 900108, Nigeria",
     phone: "+234 913 937 0513",
     phoneHref: "tel:+2349139370513",
     email: "ng@elhubventures.com",

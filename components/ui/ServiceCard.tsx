@@ -3,7 +3,7 @@ import type { Service } from "@/content/services";
 
 export function ServiceCard({ service }: { service: Service }) {
   return (
-    <article className="flex h-full flex-col border border-rule bg-paper-raised p-6 transition duration-200 hover:-translate-y-0.5">
+    <article className="card-surface flex h-full flex-col p-6">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">{service.shortTitle}</p>
       <h3 className="mt-3 font-display text-2xl text-ink">{service.title}</h3>
       <p className="mt-3 flex-1 text-ink-muted">{service.summary}</p>

@@ -38,11 +38,15 @@ export function SiteHeader() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-40 border-b transition duration-150 ${
+      className={`fixed inset-x-0 top-0 z-40 border-b transition-[height,background-color,border-color] duration-150 ${
         scrolled || menuOpen ? "border-rule bg-paper/95 backdrop-blur-md" : "border-transparent bg-paper/80"
       }`}
     >
-      <Container className="flex h-16 items-center justify-between gap-4 sm:h-[4.25rem]">
+      <Container
+        className={`flex items-center justify-between gap-4 transition-[height] duration-150 ${
+          scrolled ? "h-14" : "h-16 sm:h-[4.25rem]"
+        }`}
+      >
         <BrandLogo priority />
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -53,51 +57,57 @@ export function SiteHeader() {
           >
             <button
               type="button"
-              className={`rounded-sm px-3 py-2 text-sm font-medium transition duration-150 hover:bg-gold-soft hover:text-ink ${
+              className={`nav-link rounded-sm px-3 py-2 text-sm font-medium transition duration-150 hover:bg-gold-soft hover:text-ink ${
                 servicesOpen ? "bg-gold-soft text-ink" : "text-ink-muted"
               }`}
               aria-expanded={servicesOpen}
+              data-active={servicesOpen}
               onClick={() => setServicesOpen((open) => !open)}
             >
               Services
             </button>
-            {servicesOpen ? (
-              <div className="absolute left-0 top-full w-[36rem] border border-rule bg-paper-raised p-5">
-                <div className="grid grid-cols-2 gap-6">
-                  {SERVICE_GROUPS.map((group) => (
-                    <div key={group.id}>
-                      <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-[0.16em] text-gold">
-                        {group.label}
-                      </p>
-                      <ul>
-                        {SERVICES.filter((service) => service.group === group.id).map((service) => (
-                          <li key={service.slug}>
-                            <Link
-                              href={`/services/${service.slug}`}
-                              className="block rounded-sm px-2 py-1.5 text-sm text-ink-muted transition duration-150 hover:bg-gold-soft hover:text-ink"
-                            >
-                              {service.title}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-                <Link
-                  href="/services"
-                  className="mt-4 inline-block rounded-sm px-2 py-1.5 text-sm font-semibold text-ink transition duration-150 hover:bg-gold-soft hover:text-gold"
-                >
-                  View all services
-                </Link>
+            <div
+              className="dropdown-panel glass absolute left-0 top-full w-[36rem] border border-rule p-5"
+              data-open={servicesOpen}
+              aria-hidden={!servicesOpen}
+            >
+              <div className="grid grid-cols-2 gap-6">
+                {SERVICE_GROUPS.map((group) => (
+                  <div key={group.id}>
+                    <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-[0.16em] text-gold">
+                      {group.label}
+                    </p>
+                    <ul>
+                      {SERVICES.filter((service) => service.group === group.id).map((service) => (
+                        <li key={service.slug}>
+                          <Link
+                            href={`/services/${service.slug}`}
+                            tabIndex={servicesOpen ? 0 : -1}
+                            className="block rounded-sm px-2 py-1.5 text-sm text-ink-muted transition duration-150 hover:bg-gold-soft hover:text-ink"
+                          >
+                            {service.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
-            ) : null}
+              <Link
+                href="/services"
+                tabIndex={servicesOpen ? 0 : -1}
+                className="mt-4 inline-block rounded-sm px-2 py-1.5 text-sm font-semibold text-ink transition duration-150 hover:bg-gold-soft hover:text-gold"
+              >
+                View all services
+              </Link>
+            </div>
           </div>
           {NAV_LINKS.filter((link) => link.label !== "Services").map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`rounded-sm px-3 py-2 text-sm font-medium transition duration-150 hover:bg-gold-soft hover:text-ink ${
+              data-active={pathname === link.href}
+              className={`nav-link rounded-sm px-3 py-2 text-sm font-medium transition duration-150 hover:bg-gold-soft hover:text-ink ${
                 pathname === link.href ? "bg-gold-soft text-ink" : "text-ink-muted"
               }`}
             >
@@ -126,7 +136,7 @@ export function SiteHeader() {
       </Container>
 
       {menuOpen ? (
-        <div id={menuId} className="border-t border-rule bg-paper lg:hidden">
+        <div id={menuId} className="glass border-t border-rule lg:hidden">
           <Container className="flex max-h-[calc(100vh-4rem)] flex-col gap-5 overflow-y-auto py-6">
             {SERVICE_GROUPS.map((group) => (
               <div key={group.id}>

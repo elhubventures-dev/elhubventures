@@ -8,6 +8,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
   description: "Privacy policy for EL-HUB VENTURES. Learn how we collect, use, and protect your data.",
   path: "/privacy",
+  index: false,
 });
 
 export default function PrivacyPage() {

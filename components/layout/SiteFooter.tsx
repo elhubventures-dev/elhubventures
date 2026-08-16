@@ -4,6 +4,7 @@ import { SocialLinks } from "@/components/layout/SocialLinks";
 import { Container } from "@/components/ui/Container";
 import { ProtectedDocLink } from "@/components/layout/ProtectedDocLink";
 import { SERVICES } from "@/content/services";
+import { TrackedLink } from "@/components/seo/TrackedLink";
 import { HUBS, SITE_EMAIL } from "@/lib/site";
 
 export function SiteFooter() {
@@ -15,9 +16,9 @@ export function SiteFooter() {
           <p className="mt-4 max-w-xs text-sm text-ink-muted">
             Architecting premium digital solutions for ambitious leaders. Code. Connect. Conquer.
           </p>
-          <a href={`mailto:${SITE_EMAIL}`} className="mt-4 inline-block text-sm text-ink hover:text-gold">
+          <TrackedLink href={`mailto:${SITE_EMAIL}`} eventName="click" className="mt-4 inline-block text-sm text-ink hover:text-gold">
             {SITE_EMAIL}
-          </a>
+          </TrackedLink>
         </div>
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Services</h2>

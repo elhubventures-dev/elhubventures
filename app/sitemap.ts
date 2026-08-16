@@ -4,8 +4,20 @@ import { getLivePosts } from "@/lib/posts";
 import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastMod = new Date("2026-08-13");
-  const staticRoutes = ["", "/contact", "/about", "/case-studies", "/resources", "/services", "/privacy", "/terms"];
+  const lastMod = new Date("2026-08-16");
+  const staticRoutes = [
+    "",
+    "/contact",
+    "/about",
+    "/case-studies",
+    "/resources",
+    "/resources/glossary",
+    "/resources/faq",
+    "/resources/react-vs-flutter",
+    "/resources/statistics",
+    "/resources/agency-vs-freelancer",
+    "/services",
+  ];
 
   const serviceEntries = SERVICES.map((service) => ({
     url: `${SITE_URL}/services/${service.slug}`,

@@ -1,0 +1,25 @@
+name: SEO Validation
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Check for missing meta tags
+        run: node scripts/seo-audit.js
+      - name: Production Lighthouse (optional)
+        if: ${{ secrets.LHCI_GITHUB_APP_TOKEN != '' }}
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://www.elhubventures.com/
+            https://www.elhubventures.com/services
+            https://www.elhubventures.com/resources
+          uploadArtifacts: true

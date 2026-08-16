@@ -8,6 +8,7 @@ export const metadata: Metadata = pageMetadata({
   title: "Terms of Service",
   description: "Terms of service for EL-HUB VENTURES digital services.",
   path: "/terms",
+  index: false,
 });
 
 export default function TermsPage() {
