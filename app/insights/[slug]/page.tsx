@@ -6,6 +6,8 @@ import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { CtaBand } from "@/components/ui/CtaBand";
+import { PageHero } from "@/components/ui/PageHero";
 import { getPost, getPostHtml } from "@/lib/posts";
 import { pageMetadata, absoluteUrl, breadcrumbJsonLd } from "@/lib/seo";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
@@ -38,6 +40,9 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
   const publishedISO = new Date(post.publishDate).toISOString().split("T")[0];
   const pageUrl = absoluteUrl(`/insights/${post.slug}`);
   const description = `${post.topic}. Expert insight on ${post.keyword} from ${SITE_NAME}.`.slice(0, 160);
+  const pullQuote = post.keyword
+    ? `A practical take on ${post.keyword} for operators deciding how to staff, architect, or grow a digital product.`
+    : "A practical take for operators deciding how to staff, architect, or grow a digital product.";
 
   const articleLd = {
     "@context": "https://schema.org",
@@ -67,25 +72,20 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
     <>
       <Breadcrumbs items={crumbs} />
       <article>
-        <header className="border-b border-rule bg-paper-raised pt-28 pb-14">
-          <Container className="max-w-3xl">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-gold">Technical insight</p>
-            <h1 className="font-display text-4xl leading-tight text-ink sm:text-5xl">{post.topic}</h1>
-            <p className="mt-5 text-ink-muted">
-              Published {post.publishDate}
-              {post.keyword ? ` · ${post.keyword}` : ""}
-              {" · "}
-              Last updated {post.publishDate}
-            </p>
-          </Container>
-        </header>
+        <PageHero
+          eyebrow="Technical insight"
+          title={post.topic}
+          pullQuote={pullQuote}
+          meta={`Published ${post.publishDate}${post.keyword ? ` · ${post.keyword}` : ""} · Last updated ${post.publishDate}`}
+          narrow
+        />
         <AnswerCapsule>
           {post.topic}. This EL-HUB VENTURES insight covers {post.keyword || "the topic"} for operators deciding how to
           staff, architect, or grow a digital product.
         </AnswerCapsule>
         <Container className="py-16">
           <div className="prose-insight" dangerouslySetInnerHTML={{ __html: html }} />
-          <aside className="mt-16 max-w-[42rem] border border-rule bg-paper-raised p-6">
+          <aside className="mt-16 max-w-[42rem] border-y border-rule py-8">
             <h2 className="font-display text-xl text-ink">Explore further</h2>
             <ul className="mt-4 space-y-2 text-ink-muted">
               <li>
@@ -110,6 +110,7 @@ export default async function InsightPage({ params }: { params: Promise<Params> 
           </aside>
         </Container>
       </article>
+      <CtaBand />
       <JsonLd data={articleLd} />
       <JsonLd data={breadcrumbJsonLd(crumbs.map((c) => ({ name: c.name, path: c.href })))} />
     </>

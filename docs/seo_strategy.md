@@ -3,7 +3,7 @@
 **Site:** https://www.elhubventures.com  
 **Stack:** Next.js 15 App Router  
 **Research mode:** hybrid (no paid APIs until GSC/Ahrefs exports are pasted)  
-**Last updated:** 2026-08-16 (in-repo leftovers: brand title, statistics + agency-vs-freelancer pages)
+**Last updated:** 2026-08-16 (sitemap Success on GSC + Bing — 30 URLs discovered)
 
 ## Locked inputs
 
@@ -29,19 +29,22 @@
 | 11 CI | Complete | `seo-check.yml`, `seo:audit`, `seo:ping` |
 | 12 Close-out | See `.tmp/seo` checklist |
 
-## GSC baseline (ingested)
+## GSC / Bing baseline (ingested)
 
-See `.tmp/seo/gsc_ingest.md`. Coverage is the constraint: 3 valid indexed URLs, 15 discovered-not-indexed, sitemap last processed 2026-06-27.
+See `.tmp/seo/gsc_ingest.md`. Earlier Coverage: 3 valid indexed URLs, 15 discovered-not-indexed.
+
+**Sitemap (16 Aug 2026):** both GSC and Bing report `https://www.elhubventures.com/sitemap.xml` as **Success**, last read/crawl same day, **30 pages discovered** (was 18). Discovery ≠ indexing — next step is URL Inspection on money pages.
 
 ## Owner tasks (not done in repo)
 
-1. Resubmit sitemap in GSC after deploy; request indexing on money pages.
-2. Confirm apex → www 301 (apex still receives impressions).
-3. Paste PageSpeed / Lighthouse JSON for CWV.
-4. Finish GBP profile strength: services, photos, weekly posts; ask for reviews (3 × 5.0 today).
-5. Push the **same** NAP to Bing Places, Apple Maps, directories.
-6. In GA4 Admin, mark `generate_lead` as a key event (currently 0 key events).
-7. Merchant Center is **3/6 complete**. Do not finish Shopping unless you sell SKU products. This is a services firm — GBP + website matter more than Merchant Center.
+1. ~~Resubmit sitemap~~ — done (GSC + Bing, 30 URLs).
+2. Request indexing on canonicals: `/`, `/services`, `/contact`, `/about`, `/resources`, `/services/web-development`, `/services/seo-services`, live insight slugs. Skip `.html` / `http://`.
+3. Confirm apex → www 301 (apex still receives impressions).
+4. Paste PageSpeed / Lighthouse JSON for CWV.
+5. Finish GBP profile strength: services, photos, weekly posts; ask for reviews (3 × 5.0 today).
+6. Push the **same** NAP to Bing Places, Apple Maps, directories.
+7. In GA4 Admin, mark `generate_lead` as a key event (currently 0 key events).
+8. Merchant Center is **3/6 complete**. Do not finish Shopping unless you sell SKU products.
 
 ## GBP (verified 2026-08-16)
 

@@ -47,7 +47,7 @@ export default function AgencyVsFreelancerPage() {
       <PageHero
         eyebrow="Comparison"
         title="Web development agency vs freelancer in Nigeria: which model fits?"
-        description="A commercial choice, not a moral one. EL-HUB VENTURES is a delivery firm; many excellent specialists work independently."
+        pullQuote="A commercial choice, not a moral one. EL-HUB VENTURES is a delivery firm; many excellent specialists work independently."
       />
       <AnswerCapsule>
         Hire a freelancer when one well-scoped skill is the whole job. Hire a delivery firm when you need product,

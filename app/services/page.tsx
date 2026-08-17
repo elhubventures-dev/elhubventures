@@ -30,8 +30,7 @@ export default function ServicesIndexPage() {
       <PageHero
         eyebrow="Services"
         title="Product, experience, growth, and platform."
-        description="End-to-end delivery from discovery through launch and retainers. Pick a practice, or start with a brief."
-        primaryCta={{ href: "/contact", label: "Start a project" }}
+        pullQuote="End-to-end delivery from discovery through launch and retainers. Pick a practice, or start with a brief."
       />
       <AnswerCapsule>
         EL-HUB VENTURES services cover product (web, mobile, commerce, AI), experience (UI/UX), growth (SEO and

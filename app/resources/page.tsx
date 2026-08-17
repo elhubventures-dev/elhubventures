@@ -33,7 +33,7 @@ export default function ResourcesPage() {
       <PageHero
         eyebrow="Insights"
         title="Resources from live delivery work."
-        description="Architecture, SEO, cloud, and product notes from engagements across Nigeria, North America, the UK, and Cameroon."
+        pullQuote="Architecture, SEO, cloud, and product notes from engagements across Nigeria, North America, the UK, and Cameroon."
       />
       <AnswerCapsule>
         The EL-HUB VENTURES insights hub publishes technical articles on web architecture, mobile engineering, SEO,

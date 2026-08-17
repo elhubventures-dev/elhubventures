@@ -48,7 +48,7 @@ export default function StatisticsPage() {
       <PageHero
         eyebrow="Statistics"
         title="What do public reports actually say about digital access in Nigeria?"
-        description="A reading guide for operators who are briefed with impressive percentages. Every figure below is tied to a live publisher URL."
+        pullQuote="A reading guide for operators who are briefed with impressive percentages. Every figure below is tied to a live publisher URL."
       />
       <AnswerCapsule>
         Treat market statistics as sourced time series, not as proof that a web development agency in Nigeria can

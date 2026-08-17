@@ -31,7 +31,7 @@ export default function FaqHubPage() {
       <PageHero
         eyebrow="FAQ"
         title="What do operators usually ask before a brief?"
-        description="Company questions plus service-specific answers. Schema is attached so search and AI engines can extract Q&A pairs."
+        pullQuote="Company questions plus service-specific answers. Schema is attached so search and AI engines can extract Q&A pairs."
       />
       <AnswerCapsule>
         EL-HUB VENTURES is a Nigeria-headquartered web and mobile engineering firm with hubs in Canada, the UK, and

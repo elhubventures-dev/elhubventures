@@ -41,7 +41,7 @@ export default function ComparisonPage() {
       <PageHero
         eyebrow="Comparison"
         title="React Native vs Flutter: which stack fits an MVP in 2026?"
-        description="A decision page for founders, not a framework war. EL-HUB VENTURES implements both."
+        pullQuote="A decision page for founders, not a framework war. EL-HUB VENTURES implements both."
       />
       <AnswerCapsule>
         Choose Flutter when you need a highly custom, consistent UI on iOS and Android from one codebase. Choose React

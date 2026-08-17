@@ -5,7 +5,10 @@ export type Crumb = { name: string; href: string };
 
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="border-b border-rule bg-paper">
+    <nav
+      aria-label="Breadcrumb"
+      className="border-b border-rule bg-paper pt-16 sm:pt-[4.25rem]"
+    >
       <Container>
         <ol className="flex flex-wrap gap-2 py-3 text-xs text-ink-muted">
           {items.map((item, index) => {

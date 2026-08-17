@@ -14,7 +14,12 @@ export const metadata: Metadata = pageMetadata({
 export default function TermsPage() {
   return (
     <>
-      <PageHero eyebrow="Legal" title="Terms of Service" description="Last updated: April 2026" />
+      <PageHero
+        eyebrow="Legal"
+        title="Terms of Service"
+        meta="Last updated: April 2026"
+        clearHeader
+      />
       <section className="py-16">
         <Container className="max-w-3xl space-y-5 text-ink-muted">
           <p>

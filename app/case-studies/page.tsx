@@ -28,8 +28,7 @@ export default function CaseStudiesPage() {
       <PageHero
         eyebrow="Work"
         title="Measured delivery. Documented outcomes."
-        description="These are delivery examples with stacks, timelines, and before/after metrics. They are not attributed client testimonials."
-        primaryCta={{ href: "/contact", label: "Start a project" }}
+        pullQuote="These are delivery examples with stacks, timelines, and before/after metrics. They are not attributed client testimonials."
       />
       <AnswerCapsule>
         EL-HUB VENTURES case studies are labelled delivery examples with stacks, timelines, and before/after metrics.

@@ -47,7 +47,7 @@ export default function GlossaryPage() {
       <PageHero
         eyebrow="Glossary"
         title="What do these engineering and SEO terms mean?"
-        description="100–200 word definitions are summarized here so humans and AI crawlers share the same vocabulary."
+        pullQuote="100–200 word definitions are summarized here so humans and AI crawlers share the same vocabulary."
       />
       <AnswerCapsule>
         This glossary defines the product, cloud, and SEO terms EL-HUB VENTURES uses on service and insight pages. Each

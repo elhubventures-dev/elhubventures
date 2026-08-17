@@ -30,7 +30,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Contact"
         title="Tell us what you need to ship."
-        description="Share scope, timeline, and constraints. We reply with a roadmap and a proposal — usually within 48 hours."
+        pullQuote="Share scope, timeline, and constraints. We reply with a roadmap and a proposal — usually within 48 hours."
       />
       <AnswerCapsule>
         Contact EL-HUB VENTURES at 12 Garba A Idris St, Kado, Abuja 900108, or from Ontario, Birmingham, or Limbe. Email
