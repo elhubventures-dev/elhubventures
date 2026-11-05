@@ -30,16 +30,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, message: "Emails sent successfully" });
   } catch (error) {
     console.error("Error sending email:", error);
-    const code = error && typeof error === "object" && "code" in error ? String(error.code) : "";
-    if (code === "EAUTH") {
-      return NextResponse.json(
-        {
-          success: false,
-          message: "SMTP authentication failed. Please verify SMTP_USER and SMTP_PASS in .env.",
-        },
-        { status: 502 }
-      );
-    }
-    return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, message: "Unable to send email right now. Please try again shortly." },
+      { status: 502 }
+    );
   }
 }

@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
@@ -40,17 +40,26 @@ export type ContactPayload = {
   companyWebsite?: string;
 };
 
-function getTransporter() {
-  const port = Number.parseInt(process.env.SMTP_PORT || "465", 10);
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || "smtp.hostinger.com",
-    port,
-    secure: port === 465,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY is not configured");
+  }
+  return new Resend(apiKey);
+}
+
+function getSenderEmail() {
+  const configured = process.env.RESEND_FROM || "EL-HUB VENTURES <contact@elhubventures.com>";
+  const match = configured.match(/<([^>]+)>/);
+  return (match?.[1] || configured).trim();
+}
+
+function formatFrom(displayName: string) {
+  return `${displayName} <${getSenderEmail()}>`;
+}
+
+function getAdminEmail() {
+  return process.env.CONTACT_EMAIL || "contact@elhubventures.com";
 }
 
 function applyTemplate(template: string, values: Record<string, string>) {
@@ -58,6 +67,15 @@ function applyTemplate(template: string, values: Record<string, string>) {
     (html, [key, value]) => html.split(`{{${key}}}`).join(value),
     template
   );
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 export function isRateLimited(clientIp: string) {
@@ -88,27 +106,27 @@ export async function sendContactEmails(payload: ContactPayload) {
     payload.message.length > 100 ? `${payload.message.slice(0, 100)}...` : payload.message;
 
   adminTemplate = applyTemplate(adminTemplate, {
-    name: payload.name,
-    email: payload.email,
-    service: serviceText,
-    budget: budgetText,
-    timeline: timelineText,
-    message: payload.message,
+    name: escapeHtml(payload.name),
+    email: escapeHtml(payload.email),
+    service: escapeHtml(serviceText),
+    budget: escapeHtml(budgetText),
+    timeline: escapeHtml(timelineText),
+    message: escapeHtml(payload.message),
   });
 
   userTemplate = applyTemplate(userTemplate, {
-    firstName,
-    service: serviceText,
-    budget: budgetText,
-    timeline: timelineText,
-    messagePreview,
+    firstName: escapeHtml(firstName),
+    service: escapeHtml(serviceText),
+    budget: escapeHtml(budgetText),
+    timeline: escapeHtml(timelineText),
+    messagePreview: escapeHtml(messagePreview),
   });
 
-  const adminEmail = process.env.CONTACT_EMAIL || process.env.SMTP_USER;
-  const transporter = getTransporter();
+  const resend = getResendClient();
+  const adminEmail = getAdminEmail();
 
-  await transporter.sendMail({
-    from: `"EL-HUB VENTURES System" <${process.env.SMTP_USER}>`,
+  const adminResult = await resend.emails.send({
+    from: formatFrom("EL-HUB VENTURES System"),
     to: adminEmail,
     bcc: adminEmail,
     subject: `New Lead: ${payload.name} - ${serviceText}`,
@@ -116,11 +134,19 @@ export async function sendContactEmails(payload: ContactPayload) {
     replyTo: payload.email,
   });
 
-  await transporter.sendMail({
-    from: `"EL-HUB VENTURES" <${process.env.SMTP_USER}>`,
+  if (adminResult.error) {
+    throw new Error(adminResult.error.message || "Failed to send admin notification");
+  }
+
+  const userResult = await resend.emails.send({
+    from: formatFrom("EL-HUB VENTURES"),
     to: payload.email,
     bcc: adminEmail,
     subject: "Request Received - EL-HUB VENTURES",
     html: userTemplate,
   });
+
+  if (userResult.error) {
+    throw new Error(userResult.error.message || "Failed to send user confirmation");
+  }
 }

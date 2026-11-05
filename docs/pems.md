@@ -1,7 +1,7 @@
 # Pulse Engineering Memory System (PEMS) — Project Record
 
 **PEMS Version:** 1.0  
-**Last Updated:** 2026-08-16  
+**Last Updated:** 2026-11-05  
 **Updated By:** Pulse Software Studio / Senior Full Stack Engineer  
 
 ---
@@ -14,11 +14,11 @@
 | Current version | 2.0.0 |
 | Current sprint / phase | SEO + GEO Sections 0–12 implemented in repo |
 | Architecture (one line) | Next.js App Router marketing site + contact Route Handler + markdown insights |
-| Tech stack (one line) | Next.js 15, React 19, TypeScript, Tailwind CSS v4, Zod, React Hook Form, nodemailer, marked |
+| Tech stack (one line) | Next.js 15, React 19, TypeScript, Tailwind CSS v4, Zod, React Hook Form, Resend, marked |
 | Design system | Consulting-light tokens in `app/globals.css` |
 | Primary risks | Only 3 GSC-valid URLs; CSP vs widgets; illustrative case studies vs leadership names |
 | Open decisions | Real client proof vs labelled delivery examples |
-| Recent changes | Level 3 motion/premium UI (CSS Reveal, glass, mesh heroes) |
+| Recent changes | Resend contact email + consulting-light branded templates |
 | Next priorities | GSC index money pages; complete GBP profile; mark GA4 key event; PSI |
 
 ---
@@ -58,7 +58,7 @@
 | CI/CD | Vercel | |
 | Hosting | Vercel | |
 | AI / LLM (if any) | N/A on the public site | |
-| Other services | SMTP (Hostinger), Calendly, GA4 after cookie consent | |
+| Other services | Resend (transactional email), Calendly, GA4 after cookie consent | Domain `elhubventures.com` must be verified in Resend (SPF/DKIM) |
 
 **Documented exceptions to PSEF:** Static marketing site; no Prisma/PostgreSQL/auth in this phase.
 
@@ -77,7 +77,7 @@
 | Caching strategy | `force-dynamic` on insights/resources |
 | Background jobs | Content calendar gates publish dates |
 | Multi-tenancy | N/A |
-| Key integration points | SMTP, Calendly, GA4 |
+| Key integration points | Resend, Calendly, GA4 |
 
 **Architecture Decision Records (summary):** 2026-08-13 — rebuild in Next.js rather than restyle static HTML; consulting-light visual system.
 
@@ -107,7 +107,7 @@
 | Branch naming | `feature/`, `bugfix/`, `hotfix/`, `release/` |
 | Commit style | Conventional Commits |
 | PR / review process | Pulse playbook review checklist |
-| Env var naming | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `CONTACT_EMAIL` |
+| Env var naming | `RESEND_API_KEY`, `RESEND_FROM`, `CONTACT_EMAIL` |
 | Testing expectations | Manual + Lighthouse until a test suite is added |
 | Documentation location | `docs/pems.md`, `llms.txt` |
 
@@ -123,6 +123,7 @@
 | 2026-08-13 | Light-first consulting look | Professional B2B UX vs luxury dark template | Keep gold-on-black | New visual identity |
 | 2026-08-13 | Case studies labelled as delivery examples | Same names previously used as clients and leadership | Fake testimonials | Trust risk reduced |
 | 2026-08-16 | CSS-first Level 3 motion (no Framer Motion) | Keep bundle small; match PEMS CSS-only motion | Framer Motion | `Reveal` + tokens |
+| 2026-11-05 | Resend for contact email | Reliable API delivery + branded templates aligned to consulting-light | Hostinger SMTP / nodemailer | Env: `RESEND_*`; templates in `email-templates/` |
 
 ---
 
@@ -131,7 +132,7 @@
 | Type | Constraint |
 |---|---|
 | Budget / timeline | Rebuild in one implementation pass |
-| Technical | Must preserve SMTP contact and calendar-gated markdown |
+| Technical | Must preserve Resend contact notifications and calendar-gated markdown |
 | Business | SEO URLs must 301 from `.html` |
 | Legal / compliance | Cookie consent before GA4 |
 | Other | No CMS in v1 |
@@ -165,7 +166,7 @@
 | Risk | Category | Severity | Mitigation | Status |
 |---|---|---|---|---|
 | `.html` URLs 404 | Business | High | Permanent redirects in `next.config.ts` | Mitigated |
-| SMTP failure after cutover | Technical | High | Same env vars; Node runtime on route | Open |
+| Resend send failure / unverified domain | Technical | High | Verify `elhubventures.com` in Resend; set `RESEND_API_KEY` + `RESEND_FROM` on Vercel; Node runtime on route | Open |
 | Illustrative work read as clients | Business | Medium | Explicit labelling on Work | Mitigated |
 | Insights unpublished until rebuild | Technical | Low | `force-dynamic` on resources/insights | Mitigated |
 
@@ -187,7 +188,7 @@
 | Note | Detail |
 |---|---|
 | Assumptions | Vercel remains the host |
-| External dependencies | Hostinger SMTP, Calendly, GA4 |
+| External dependencies | Resend, Calendly, GA4 |
 | Specialist handoffs | Brand/UX defined in rebuild plan; engineering implemented |
 
 ---
